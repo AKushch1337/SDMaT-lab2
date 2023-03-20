@@ -36,6 +36,12 @@ class LinkedListTest {
 
     @Test
     fun deleteTest() {
+        list.append('o')
+        list.append('y')
+        list.append('b')
+        list.append('x')
+        assertEquals('o', list.delete(0))
+        assertEquals(3, list.length())
     }
 
     @Test
@@ -78,6 +84,10 @@ class LinkedListTest {
     }
 
     @Test
+    fun findLastTest() {
+    }
+
+    @Test
     fun clearTest() {
         list.append('f')
         list.append('f')
@@ -88,5 +98,14 @@ class LinkedListTest {
 
     @Test
     fun extendTest() {
+        val secondList = LinkedListImpl()
+        secondList.append('c')
+        secondList.append('d')
+        list.append('a')
+        list.append('b')
+        list.extend(secondList)
+        assertEquals(3, list.length())
+        assertEquals('d', list.get(3))
+        assertEquals('a', list.get(0))
     }
 }
