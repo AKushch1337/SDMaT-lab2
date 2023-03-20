@@ -104,7 +104,7 @@ class LinkedListTest {
         list.append('a')
         list.append('b')
         list.extend(secondList)
-        assertEquals(3, list.length())
+        assertEquals(4, list.length())
         assertEquals('d', list.get(3))
         assertEquals('a', list.get(0))
     }
