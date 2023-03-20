@@ -70,7 +70,13 @@ class LinkedListImpl : LinkedList {
     }
 
     override fun clone(): LinkedListImpl {
-        return LinkedListImpl()
+        val clonedList = LinkedListImpl()
+        var currentNode = head
+        while (currentNode != null) {
+            clonedList.append(currentNode.element)
+            currentNode = currentNode.next
+        }
+        return clonedList
     }
 
     override fun reverse() {

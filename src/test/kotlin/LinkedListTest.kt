@@ -53,6 +53,13 @@ class LinkedListTest {
 
     @Test
     fun cloneTest() {
+        list.append('i')
+        list.append('x')
+        list.append('b')
+        list.append('o')
+        val clonedList = list.clone()
+        assertEquals(4, clonedList.length())
+        assertEquals('i', clonedList.get(0))
     }
 
     @Test
