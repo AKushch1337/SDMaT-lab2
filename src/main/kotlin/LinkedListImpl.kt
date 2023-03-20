@@ -73,7 +73,19 @@ class LinkedListImpl : LinkedList {
         return LinkedListImpl()
     }
 
-    override fun reverse() {}
+    override fun reverse() {
+        var currentNode = head
+        var temp: Node?
+        while (currentNode != null) {
+            temp = currentNode.next
+            currentNode.next = currentNode.prev
+            currentNode.prev = temp
+            currentNode = temp
+        }
+        temp = head
+        head = tail
+        tail = temp
+    }
 
     override fun findFirst(element: Char): Int {
         return 5
