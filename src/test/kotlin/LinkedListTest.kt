@@ -5,53 +5,69 @@ import org.junit.jupiter.api.Assertions.*
 
 class LinkedListTest {
 
-    private val linkedList: LinkedListImpl = LinkedListImpl()
+    private val list: LinkedListImpl = LinkedListImpl()
 
     @Test
-    fun length() {
-        assertEquals(0, linkedList.length())
+    fun lengthTest() {
+        list.append('a')
+        list.append('a')
+        list.append('a')
+        assertEquals(3, list.length())
     }
 
     @Test
-    fun append() {
-        val length = linkedList.length()
-        linkedList.append('a')
-        assertEquals(length + 1, linkedList.length())
+    fun appendTest() {
+        val length = list.length()
+        list.append('d')
+        assertEquals(length + 1, list.length())
     }
 
     @Test
-    fun insert() {
+    fun insertTest() {
+        list.append('d')
+        list.append('d')
+        list.append('d')
+        list.append('d')
+        list.insert('f', 0)
+        list.insert('o', 3)
+        assertEquals('f', list.get(0))
+        assertEquals('o', list.get(3))
     }
 
     @Test
-    fun delete() {
+    fun deleteTest() {
     }
 
     @Test
-    fun deleteAll() {
+    fun deleteAllTest() {
     }
 
     @Test
-    fun get() {
+    fun getTest() {
+        list.append('g')
+        list.append('g')
+        list.append('g')
+        list.append('o')
+        assertEquals('o', list.get(3))
     }
 
     @Test
-    fun testClone() {
+    fun cloneTest() {
     }
 
     @Test
-    fun reverse() {
+    fun reverseTest() {
     }
 
     @Test
-    fun findFirst() {
+    fun findFirstTest() {
     }
 
     @Test
-    fun clear() {
+    fun clearTest() {
     }
 
     @Test
-    fun extend() {
+    fun extendTest() {
     }
 }
