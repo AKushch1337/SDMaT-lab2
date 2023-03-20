@@ -8,6 +8,7 @@ interface LinkedList {
     fun clone(): LinkedListImpl
     fun reverse()
     fun findFirst(element: Char): Int
+    fun findLast(element: Char): Int
     fun clear()
     fun extend(elements: LinkedListImpl)
 }

@@ -8,10 +8,16 @@ class LinkedListTest {
     private val linkedList: LinkedListImpl = LinkedListImpl()
 
     @Test
-    fun length() {}
+    fun length() {
+        assertEquals(0, linkedList.length())
+    }
 
     @Test
-    fun append() {}
+    fun append() {
+        val length = linkedList.length()
+        linkedList.append('a')
+        assertEquals(length + 1, linkedList.length())
+    }
 
     @Test
     fun insert() {
