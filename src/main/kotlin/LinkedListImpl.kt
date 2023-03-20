@@ -31,11 +31,13 @@ class LinkedListImpl : LinkedList {
                 head?.prev = newNode
                 head = newNode
             }
+
             length -> {
                 tail?.next = newNode
                 newNode.prev = tail
                 tail = newNode
             }
+
             else -> {
                 var currentNode = head
                 repeat(index - 1) {
@@ -51,8 +53,38 @@ class LinkedListImpl : LinkedList {
     }
 
     override fun delete(index: Int): Char {
+        if (index < 0 || index >= length) {
+            throw IndexOutOfBoundsException("Invalid index: $index")
+        }
+        val deletedNode: Node?
+        when (index) {
+            0 -> {
+                deletedNode = head
+                head = head?.next
+                head?.prev = null
+                if (head == null) {
+                    tail = null
+                }
+            }
+
+            (length - 1) -> {
+                deletedNode = tail
+                tail = tail?.prev
+                tail?.next = null
+            }
+
+            else -> {
+                var currentNode = head
+                repeat(index) {
+                    currentNode = currentNode?.next
+                }
+                deletedNode = currentNode
+                currentNode?.prev?.next = currentNode?.next
+                currentNode?.next?.prev = currentNode?.prev
+            }
+        }
         length--
-        return 'a'
+        return deletedNode!!.element
     }
 
     override fun deleteAll(element: Char) {}
@@ -107,6 +139,12 @@ class LinkedListImpl : LinkedList {
         length = 0
     }
 
-    override fun extend(elements: LinkedListImpl) {}
+    override fun extend(elements: LinkedListImpl) {
+        var currentNode = elements.head
+        while (currentNode != null) {
+            append(currentNode.element)
+            currentNode = currentNode.next
+        }
+    }
 
 }
