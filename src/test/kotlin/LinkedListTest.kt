@@ -57,6 +57,13 @@ class LinkedListTest {
 
     @Test
     fun reverseTest() {
+        list.append('a')
+        list.append('b')
+        list.append('c')
+        list.append('d')
+        list.reverse()
+        assertEquals('a', list.get(3))
+        assertEquals('d', list.get(0))
     }
 
     @Test
