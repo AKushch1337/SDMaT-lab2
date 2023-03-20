@@ -9,16 +9,44 @@ class LinkedListImpl : LinkedList {
 
     override fun append(element: Char) {
         val newNode = Node(element)
-        if (tail != null) {
-            tail!!.prev = newNode
-        } else {
+        if (head == null) {
             head = newNode
+            tail = head
+        } else {
+            tail?.next = newNode
+            newNode.prev = tail
+            tail = newNode
         }
-        tail = newNode
         length++
     }
 
     override fun insert(element: Char, index: Int) {
+        if (index < 0 || index >= length) {
+            throw IndexOutOfBoundsException("Index $index is out of bounds for this list. Length: $length")
+        }
+        val newNode = Node(element)
+        when (index) {
+            0 -> {
+                newNode.next = head
+                head?.prev = newNode
+                head = newNode
+            }
+            length -> {
+                tail?.next = newNode
+                newNode.prev = tail
+                tail = newNode
+            }
+            else -> {
+                var currentNode = head
+                repeat(index - 1) {
+                    currentNode = currentNode?.next
+                }
+                newNode.prev = currentNode
+                newNode.next = currentNode?.next
+                currentNode?.next?.prev = newNode
+                currentNode?.next = newNode
+            }
+        }
         length++
     }
 
@@ -30,7 +58,15 @@ class LinkedListImpl : LinkedList {
     override fun deleteAll(element: Char) {}
 
     override fun get(index: Int): Char {
-        return 'a'
+        if (index < 0 || index >= length) {
+            throw IndexOutOfBoundsException("Index $index is out of bounds for this list. Length: $length")
+        }
+
+        var currentNode = head
+        repeat(index) {
+            currentNode = currentNode?.next
+        }
+        return currentNode!!.element
     }
 
     override fun clone(): LinkedListImpl {
