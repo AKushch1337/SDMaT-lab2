@@ -65,6 +65,11 @@ class LinkedListTest {
 
     @Test
     fun clearTest() {
+        list.append('f')
+        list.append('f')
+        list.append('f')
+        list.clear()
+        assertEquals(0, list.length())
     }
 
     @Test

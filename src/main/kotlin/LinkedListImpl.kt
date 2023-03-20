@@ -83,7 +83,11 @@ class LinkedListImpl : LinkedList {
         return 5
     }
 
-    override fun clear() {}
+    override fun clear() {
+        head = null
+        tail = null
+        length = 0
+    }
 
     override fun extend(elements: LinkedListImpl) {}
 
