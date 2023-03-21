@@ -1,194 +1,56 @@
 class LinkedListImpl : LinkedList {
-    private var head: Node? = null
-    private var tail: Node? = null
-    private var length = 0
+    private val list = mutableListOf<Char>()
 
     override fun length(): Int {
-        return length
+        return list.size
     }
 
     override fun append(element: Char) {
-        val newNode = Node(element)
-        if (head == null) {
-            head = newNode
-            tail = head
-        } else {
-            tail?.next = newNode
-            newNode.prev = tail
-            tail = newNode
-        }
-        length++
+        list.add(element)
     }
 
     override fun insert(element: Char, index: Int) {
-        isIndexValid(index)
-        val newNode = Node(element)
-        when (index) {
-            0 -> {
-                newNode.next = head
-                head?.prev = newNode
-                head = newNode
-            }
-
-            length -> {
-                tail?.next = newNode
-                newNode.prev = tail
-                tail = newNode
-            }
-
-            else -> {
-                var currentNode = head
-                repeat(index - 1) {
-                    currentNode = currentNode?.next
-                }
-                newNode.prev = currentNode
-                newNode.next = currentNode?.next
-                currentNode?.next?.prev = newNode
-                currentNode?.next = newNode
-            }
-        }
-        length++
+        list.add(index, element)
     }
 
     override fun delete(index: Int): Char {
-        isIndexValid(index)
-        val deletedNode: Node?
-        when (index) {
-            0 -> {
-                deletedNode = head
-                head = head?.next
-                head?.prev = null
-                if (head == null) {
-                    tail = null
-                }
-            }
-
-            (length - 1) -> {
-                deletedNode = tail
-                tail = tail?.prev
-                tail?.next = null
-            }
-
-            else -> {
-                var currentNode = head
-                repeat(index) {
-                    currentNode = currentNode?.next
-                }
-                deletedNode = currentNode
-                currentNode?.prev?.next = currentNode?.next
-                currentNode?.next?.prev = currentNode?.prev
-            }
-        }
-        length--
-        return deletedNode!!.element
+        return list.removeAt(index)
     }
 
     override fun deleteAll(element: Char) {
-        var currentNode = head
-        while (currentNode != null) {
-            if (currentNode.element == element) {
-                if (currentNode == head) {
-                    head = currentNode.next
-                    head?.prev = null
-                    if (head == null) {
-                        tail = null
-                    }
-                    length--
-                    currentNode = head
-                } else if (currentNode == tail) {
-                    tail = currentNode.prev
-                    tail?.next = null
-                    length--
-                    currentNode = null
-                } else {
-                    currentNode.prev?.next = currentNode.next
-                    currentNode.next?.prev = currentNode.prev
-                    length--
-                    currentNode = currentNode.next
-                }
-            } else {
-                currentNode = currentNode.next
-            }
-        }
+        list.removeAll { it == element }
     }
 
     override fun get(index: Int): Char {
-        isIndexValid(index)
-        var currentNode = head
-        repeat(index) {
-            currentNode = currentNode?.next
-        }
-        return currentNode!!.element
+        return list[index]
     }
 
     override fun clone(): LinkedListImpl {
         val clonedList = LinkedListImpl()
-        var currentNode = head
-        while (currentNode != null) {
-            clonedList.append(currentNode.element)
-            currentNode = currentNode.next
-        }
+        clonedList.list.addAll(list)
         return clonedList
     }
 
     override fun reverse() {
-        var currentNode = head
-        var temp: Node?
-        while (currentNode != null) {
-            temp = currentNode.next
-            currentNode.next = currentNode.prev
-            currentNode.prev = temp
-            currentNode = temp
-        }
-        temp = head
-        head = tail
-        tail = temp
+        list.reverse()
     }
 
     override fun findFirst(element: Char): Int {
-        var index = 0
-        var currentNode = head
-        while (currentNode != null) {
-            if (currentNode.element == element) {
-                return index
-            }
-            currentNode = currentNode.next
-            index++
-        }
-        return -1
+        return list.indexOf(element)
+
     }
 
     override fun findLast(element: Char): Int {
-        var index = length - 1
-        var currentNode = tail
-        while (currentNode != null) {
-            if (currentNode.element == element) {
-                return index
-            }
-            currentNode = currentNode.prev
-            index--
-        }
-        return -1
+        return list.lastIndexOf(element)
     }
 
     override fun clear() {
-        head = null
-        tail = null
-        length = 0
+        list.clear()
     }
 
     override fun extend(elements: LinkedListImpl) {
-        var currentNode = elements.head
-        while (currentNode != null) {
-            append(currentNode.element)
-            currentNode = currentNode.next
-        }
+        list.addAll(elements.list)
     }
-
-    private fun isIndexValid(index: Int) {
-        if (index < 0 || index >= length) {
-            throw IndexOutOfBoundsException("Index $index is out of bounds for this list. Length: $length")
-        }
-    }
-
 }
+
+
