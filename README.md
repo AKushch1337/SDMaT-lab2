@@ -33,6 +33,11 @@ info: kotlinc-jvm 1.8.10 (JRE 16.0.2+7-67)
 cd \path\to\project
 ```
 
+- If you want to build the project
+```
+./gradlew build
+```
+
 - If you want to run the tests
 
 ```bash 
@@ -46,6 +51,8 @@ kotlinc .\src\main\kotlin\*.kt -include-runtime -d app.jar
 ```
 
 ## Download the .jar file
+
+Download [_here_](https://github.com/AKushch1337/SDMaT-lab2/releases/download/v1.0.0/app.jar)
 
 ## Run the .jar file
 
