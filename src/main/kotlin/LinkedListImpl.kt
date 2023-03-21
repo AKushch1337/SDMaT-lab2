@@ -21,9 +21,7 @@ class LinkedListImpl : LinkedList {
     }
 
     override fun insert(element: Char, index: Int) {
-        if (index < 0 || index >= length) {
-            throw IndexOutOfBoundsException("Index $index is out of bounds for this list. Length: $length")
-        }
+        isIndexValid(index)
         val newNode = Node(element)
         when (index) {
             0 -> {
@@ -53,9 +51,7 @@ class LinkedListImpl : LinkedList {
     }
 
     override fun delete(index: Int): Char {
-        if (index < 0 || index >= length) {
-            throw IndexOutOfBoundsException("Invalid index: $index")
-        }
+        isIndexValid(index)
         val deletedNode: Node?
         when (index) {
             0 -> {
@@ -90,10 +86,7 @@ class LinkedListImpl : LinkedList {
     override fun deleteAll(element: Char) {}
 
     override fun get(index: Int): Char {
-        if (index < 0 || index >= length) {
-            throw IndexOutOfBoundsException("Index $index is out of bounds for this list. Length: $length")
-        }
-
+        isIndexValid(index)
         var currentNode = head
         repeat(index) {
             currentNode = currentNode?.next
@@ -144,6 +137,12 @@ class LinkedListImpl : LinkedList {
         while (currentNode != null) {
             append(currentNode.element)
             currentNode = currentNode.next
+        }
+    }
+
+    private fun isIndexValid(index: Int) {
+        if (index < 0 || index >= length) {
+            throw IndexOutOfBoundsException("Index $index is out of bounds for this list. Length: $length")
         }
     }
 
