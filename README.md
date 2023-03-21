@@ -62,3 +62,5 @@ java -jar app.jar
 
 ## Unit tests
 I started implementing unit tests with the help of JUnit5 early in the development of my linked list and it really helped me fix some bugs just when I coded them. Tests also improved my code quality because I thought through a lot of possible options and tests helped me a lot in that. Also, refactoring was a lot easier, e.g I created a function to have less boiler-plate code and tested it with unit tests and knew that my implementation of a new function didn't break anything.
+
+## [Commit](https://github.com/AKushch1337/SDMaT-lab2/commit/68790a3baa87b64bc97de258e21d2ae58e3f4bf0) where CI tests failed
