@@ -83,7 +83,34 @@ class LinkedListImpl : LinkedList {
         return deletedNode!!.element
     }
 
-    override fun deleteAll(element: Char) {}
+    override fun deleteAll(element: Char) {
+        var currentNode = head
+        while (currentNode != null) {
+            if (currentNode.element == element) {
+                if (currentNode == head) {
+                    head = currentNode.next
+                    head?.prev = null
+                    if (head == null) {
+                        tail = null
+                    }
+                    length--
+                    currentNode = head
+                } else if (currentNode == tail) {
+                    tail = currentNode.prev
+                    tail?.next = null
+                    length--
+                    currentNode = null
+                } else {
+                    currentNode.prev?.next = currentNode.next
+                    currentNode.next?.prev = currentNode.prev
+                    length--
+                    currentNode = currentNode.next
+                }
+            } else {
+                currentNode = currentNode.next
+            }
+        }
+    }
 
     override fun get(index: Int): Char {
         isIndexValid(index)
@@ -119,11 +146,29 @@ class LinkedListImpl : LinkedList {
     }
 
     override fun findFirst(element: Char): Int {
-        return 5
+        var index = 0
+        var currentNode = head
+        while (currentNode != null) {
+            if (currentNode.element == element) {
+                return index
+            }
+            currentNode = currentNode.next
+            index++
+        }
+        return -1
     }
 
     override fun findLast(element: Char): Int {
-        return 5
+        var index = length - 1
+        var currentNode = tail
+        while (currentNode != null) {
+            if (currentNode.element == element) {
+                return index
+            }
+            currentNode = currentNode.prev
+            index--
+        }
+        return -1
     }
 
     override fun clear() {

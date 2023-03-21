@@ -45,6 +45,16 @@ class LinkedListTest {
 
     @Test
     fun deleteAllTest() {
+        list.append('a')
+        list.append('a')
+        list.append('e')
+        list.append('d')
+        list.append('c')
+        list.deleteAll('x')
+        assertEquals(5, list.length())
+        list.deleteAll('a')
+        assertEquals(3, list.length())
+        assertEquals('e', list.get(0))
     }
 
     @Test
@@ -80,10 +90,20 @@ class LinkedListTest {
 
     @Test
     fun findFirstTest() {
+        list.append('f')
+        list.append('f')
+        list.append('f')
+        assertEquals(0, list.findFirst('f'))
+        assertEquals(-1, list.findFirst('a'))
     }
 
     @Test
     fun findLastTest() {
+        list.append('f')
+        list.append('f')
+        list.append('f')
+        assertEquals(2, list.findLast('f'))
+        assertEquals(-1, list.findLast('a'))
     }
 
     @Test
